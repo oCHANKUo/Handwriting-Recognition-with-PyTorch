@@ -2,7 +2,7 @@ import sys
 import os
 from PIL import Image, ImageOps
 import torch
-from torchvision.transforms import ToTensor
+from torchvision.transforms import ToTensor, Resize, Compose
 from model import ImageClassifier
 # from train import ImageClassifier
 import matplotlib.pyplot as plt
@@ -15,9 +15,15 @@ def predict_image(image_path, model_path="models/model_state.pt", device="cpu"):
     model.load_state_dict(torch.load(model_path, weights_only=True))
     model.eval()
 
+    # Define transforms: Resize to 28x28 to match the model input
+    transform = Compose([
+        Resize((28, 28)),   # Resize to 28x28
+        ToTensor()
+    ])
+
     # Load and Process the image
     with ImageOps.invert(Image.open(image_path).convert('L')) as img:
-        img_tensor = ToTensor()(img).unsqueeze(0).to(device)
+        img_tensor = transform(img).unsqueeze(0).to(device)
 
     # Perform Prediction
     with torch.no_grad():
