@@ -13,7 +13,8 @@ class ImageClassifier(nn.Module):
             nn.Conv2d(32, 64, kernel_size=3),
             nn.ReLU(),
             nn.Flatten(),
-            nn.Linear(64*22*22, 10)
+            # nn.Linear(64*22*22, 10)
+            nn.Linear(64*24*24, 10)  # 36,864
         )
 
     def forward(self, x):
