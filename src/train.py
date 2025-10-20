@@ -1,4 +1,5 @@
 import sys
+import torch
 from torch import save
 from torch.optim import Adam
 from torch.nn import CrossEntropyLoss
@@ -33,11 +34,10 @@ def train_model(epochs=10, lr=1e-3, device="cpu"): # cpu only training
         loss_history.append(epoch_loss) 
         print(f"Epoch {epoch+1}/{epochs}, Loss: {epoch_loss}")
 
-    save(model.state_dict(), "model_state.pt")
+    # torch.save(model.state_dict(), "model_state.pt")
+    with open('model_state.pt', 'wb') as f:
+        save(model.state_dict(), f)
     print("Training complete. Model saved as 'model_state.pt'")
-    # with open('model_state.pt', 'wb') as f:
-    #     save(model.state_dict(), f)
-    # print("Training complete. Model saved as 'model_state.pt'")
 
     # Plot loss curve
     plt.plot(range(1, epochs + 1), loss_history, marker='o')
