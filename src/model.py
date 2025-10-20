@@ -1,6 +1,10 @@
+# Convolutional Neural Network
+
 import torch
 from torch import nn
-class ImageCLassifier(nn.Module):
+
+# defining a neural network called ImageClassifier
+class ImageClassifier(nn.Module):
     def __init__(self):
         super().__init__()
         self.model = nn.Sequential(
@@ -12,5 +16,5 @@ class ImageCLassifier(nn.Module):
             nn.Linear(64*22*22, 10)
         )
 
-def forward(self, x):
-    return self. Model(x)
+    def forward(self, x):
+        return self.model(x)
