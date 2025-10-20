@@ -36,7 +36,7 @@ def train_model(epochs=10, lr=1e-3, device="cpu"): # cpu only training
 
     # torch.save(model.state_dict(), "model_state.pt")
     with open('model_state.pt', 'wb') as f:
-        save(model.state_dict(), f)
+        save(model.state_dict(), "models/model_state.pt")
     print("Training complete. Model saved as 'model_state.pt'")
 
     # Plot loss curve

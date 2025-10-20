@@ -7,7 +7,9 @@ from model import ImageClassifier
 # from train import ImageClassifier
 import matplotlib.pyplot as plt
 
-def predict_image(image_path, model_path="model_state.pt", device="cpu"):
+model_path = "models/model_state.pt"
+
+def predict_image(image_path, model_path="models/model_state.pt", device="cpu"):
     # Load Model
     model = ImageClassifier().to(device)
     model.load_state_dict(torch.load(model_path, weights_only=True))
@@ -26,7 +28,7 @@ def predict_image(image_path, model_path="model_state.pt", device="cpu"):
     plt.imshow(img, cmap="gray")
     plt.title(f"Predicted Label: {predicted_label}")
     plt.axis('off')
-    plt.savefig(f"{image_path}_prediction.png")
+    # plt.savefig(f"{image_path}_prediction.png")
     plt.show()
 
     print(f"Predicted Label: {predicted_label}")
@@ -39,10 +41,10 @@ if __name__ == "__main__":
     image_path = sys.argv[1]
     if not os.path.exists(image_path):
         print(f"Error: File '{image_path}' not found.")
-        sys.exit(1)
+        sys.exit(1) 
 
     predict_image(image_path)
 
 
     # Run this script
-    # python src/evaluate.py digits/digit1.png --- parameter is the location of the image
+    # python src/evaluate.py digits/1.jpg --- parameter is the location of the image
